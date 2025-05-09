@@ -1,0 +1,4 @@
+host: flagd
+port: 8082
+resolver: rpc
+cacheType: disabled
