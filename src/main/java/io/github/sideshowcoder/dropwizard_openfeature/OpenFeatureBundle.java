@@ -1,7 +1,10 @@
 package io.github.sideshowcoder.dropwizard_openfeature;
 
+import dev.openfeature.sdk.providers.memory.Flag;
 import io.dropwizard.core.ConfiguredBundle;
 import io.dropwizard.core.setup.Environment;
+
+import java.util.Map;
 
 /**
  * TODO tests for OpenFeatureBundle integration into a Dropwizard Application
@@ -14,8 +17,20 @@ import io.dropwizard.core.setup.Environment;
  * TODO get listed in openfeature.dev
  */
 public class OpenFeatureBundle implements ConfiguredBundle<OpenFeatureBundleConfiguration> {
+
+    private final Map<String, Flag<?>> inMemoryFlags;
+
+    public OpenFeatureBundle() {
+        this(Map.of());
+    }
+
+    public OpenFeatureBundle(Map<String, Flag<?>> inMemoryFlags) {
+        this.inMemoryFlags = inMemoryFlags;
+    }
+
     @Override
     public void run(OpenFeatureBundleConfiguration configuration, Environment environment) {
+        configuration.getOpenFeatureBundleFactory().setFlags(inMemoryFlags);
         configuration.getOpenFeatureBundleFactory().startOpenFeatureAPIManager(environment);
         configuration.getOpenFeatureBundleFactory().registerOpenFeatureHealthCheck(environment);
     }
