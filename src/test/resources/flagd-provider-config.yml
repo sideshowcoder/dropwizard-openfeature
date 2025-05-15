@@ -1,0 +1,5 @@
+openfeature:
+  provider: flagd
+  flagd:
+    offlineFlagSourcePath: ./src/test/resources/flagd-test-flags.json
+    resolver: file

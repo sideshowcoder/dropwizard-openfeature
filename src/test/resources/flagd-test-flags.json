@@ -1,0 +1,13 @@
+{
+  "$schema": "https://flagd.dev/schema/v0/flags.json",
+  "flags": {
+    "static-string-flag": {
+      "state": "ENABLED",
+      "variants": {
+        "red": "red",
+        "green": "green"
+      },
+      "defaultVariant": "red"
+    }
+  }
+}

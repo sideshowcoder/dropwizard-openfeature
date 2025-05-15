@@ -48,7 +48,7 @@ Your Dropwizard application configuration class must implement `OpenFeatureBundl
 
 ## Configuring dropwizard-openfeature in the dropwizard config file
 
-For a full overview see `OpenFeatureBundleFactory`, `OpenFeatureHealthCheckConfiguration`, and `FlagdConfiguration` a 
+For a full overview see `OpenFeatureConfiguration`, `OpenFeatureHealthCheckConfiguration`, and `FlagdConfiguration` a 
 minimal configuration for flagd runnining locally on the port 8013 would look as follows.
 
 ```yaml
@@ -63,15 +63,17 @@ For the bundle to have access to the configuration, your application configurati
 `OpenFeatureBundleConfiguration`.
 
 ```java
+import io.github.sideshowcoder.dropwizard_openfeature.OpenFeatureConfiguration;
+
 public class ApplicationConfiguration implements OpenFeatureBundleConfiguration {
 
     @Valid
     @NotNull
     @JsonProperty
-    private OpenFeatureBundleFactory openfeature;
+    private OpenFeatureConfiguration openfeature;
 
     @Override
-    public OpenFeatureBundleFactory getOpenFeatureBundleFactory() {
+    public OpenFeatureConfiguration getOpenFeatureConfiguration() {
         return openfeature;
     }
 }
