@@ -41,3 +41,5 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+/.mvn/settings.xml
+/maven-central-private-key.asc
