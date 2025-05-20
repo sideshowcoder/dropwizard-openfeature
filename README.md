@@ -1,13 +1,25 @@
 # Dropwizard Openfeature
 
-This plugin integrates [openfeature](https://openfeature.dev/) with dropwizard and allows you to use openfeature feature
+This plugin integrates [openfeature][1] with dropwizard and allows you to use openfeature feature
 flags, provided by supported openfeature providers via a managed `OpenFeatureAPI` instance.
 
-Currently only [flagd](https://flagd.dev/) and the SDKs 
-[InMemoryProvider](https://github.com/open-feature/java-sdk/blob/main/src/main/java/dev/openfeature/sdk/providers/memory/InMemoryProvider.java) 
-providers are supported
+Currently only [flagd][2] and the SDKs [InMemoryProvider][3] providers are supported
 
-## Installing the bundle from source code
+## Installing the bundle
+
+### Releases from maven central 
+
+[io.github.sideshowcoder/dropwizard-openfeature][4]
+
+```xml
+<dependency>
+  <groupId>io.github.sideshowcoder</groupId>
+  <artifactId>dropwizard-openfeature</artifactId>
+  <version>0.0.2</version>
+</dependency>
+```
+
+### Snapshots form source
 
 ```
 git clone https://github.com/sideshowcoder/dropwizard-openfeature
@@ -15,15 +27,17 @@ cd dropwizard-openfeature
 ./mvn install
 ```
 
-After installing the plugin locally you can include it in your pom.xml
+After installing the plugin locally you can include it in your `pom.xml`
 
 ```xml
 <dependency>
   <groupId>io.github.sideshowcoder</groupId>
   <artifactId>dropwizard-openfeature</artifactId>
-  <version>$VERSION</version>
+  <version>0.0.3-SNAPSHOT</version>
 </dependency>
 ```
+
+
 
 ## Included in the bundle
 
@@ -31,22 +45,23 @@ After installing the plugin locally you can include it in your pom.xml
 
 The bundle currently supports both the SDK included `InMemoryProvider` as well as `flagd`, the provider can be selected
 via the configuration. For details on the configuration options see `FlagdConfiguration` as well the 
-[flagd documentation](https://flagd.dev/providers/java/).
+[flagd documentation][5].
 
 ### OpenFeatureAPI management
 
-The initialized `OpenFeatureAPI` is managed via the dropwizard lifecycle.
+The initialized `OpenFeatureAPI` is managed via the dropwizard lifecycle and will be shutdown gracefully upon 
+application shutdown, see `OpenFeatureAPIManager`.
 
 ### Healthcheck
 
 By default the bundle registers a healthcheck on the state of the provider configured, this healthcheck can be further 
 configured via the `OpenFeatureHealthCheckConfiguration`.
 
-## Activating the bundle: Configuration
+## Activating the bundle
 
-Your Dropwizard application configuration class must implement `OpenFeatureBundleConfiguration`:
+Your Dropwizard application configuration class must implement `OpenFeatureBundleConfiguration`
 
-## Configuring dropwizard-openfeature in the dropwizard config file
+### Configuring dropwizard-openfeature in the dropwizard config file
 
 For a full overview see `OpenFeatureConfiguration`, `OpenFeatureHealthCheckConfiguration`, and `FlagdConfiguration` a 
 minimal configuration for flagd runnining locally on the port 8013 would look as follows.
@@ -63,9 +78,7 @@ For the bundle to have access to the configuration, your application configurati
 `OpenFeatureBundleConfiguration`.
 
 ```java
-import io.github.sideshowcoder.dropwizard_openfeature.OpenFeatureConfiguration;
-
-public class ApplicationConfiguration implements OpenFeatureBundleConfiguration {
+public class Config extends Configuration implements OpenFeatureBundleConfiguration {
 
     @Valid
     @NotNull
@@ -79,18 +92,86 @@ public class ApplicationConfiguration implements OpenFeatureBundleConfiguration 
 }
 ```
 
-## Activating the bundle: Initialization
+### Initialization
 
 In your application's `initialize` method, call `bootstrap.addBundle(new OpenFeatureBundle())`:
 
 ```java
-import io.github.sideshowcoder.dropwizard_openfeature.OpenFeatureBundle;
+public class App extends Application<Config> {
+    
+    @Override
+    public void initialize(Bootstrap<MyConfiguration> bootstrap) {
+        bootstrap.addBundle(new OpenFeatureBundle());
+    }
 
-@Override
-public void initialize(Bootstrap<MyConfiguration> bootstrap) {
-    bootstrap.addBundle(new OpenFeatureBundle());
+    @Override
+    public void run(Config config, Environment environment) throws Exception {
+        /* ... */
+    }
+}
+```
+
+### Using the client
+
+OpenFeature configures a global `OpenFeatureAPI` which grants access to a client, which can be injected as needed, it is 
+common practise to provide a domain as an identifier, this is however not required, unless multiple clients are to be 
+created.
+
+```java
+public class App extends Application<Config> {
+
+    @Override
+    public void initialize(Bootstrap<MyConfiguration> bootstrap) {
+        bootstrap.addBundle(new OpenFeatureBundle());
+    }
+
+    @Override
+    public void run(Config config, Environment environment) throws Exception {
+        /* ... */
+        var client = OpenFeatureAPI.getInstance().getClient("my-application-domain");
+        
+        var myResource = new MyResource(client);
+        environment.jersey().register(myResource);
+        
+        var myOtherResource = new MyOtherResource(client);
+        environment.jersey().register(myResource);
+        /* ... */
+    }
+}
+```
+
+### Accessing the underlying feature provider
+
+The bundle exposes access to the underlying feature provider. Useful for runtime configuration and introspection of the 
+provider. For example when using the `InMemoryProvider` flags can be updated at runtime for example for testing.
+
+```java
+public class App extends Application<Config> {
+
+    private OpenFeatureBundle bundle;
+    private InMemoryProvider provider;
+
+    @Override
+    public void initialize(Bootstrap<MyConfiguration> bootstrap) {
+        bundle = new OpenFeatureBundle();
+        bootstrap.addBundle(bundle);
+    }
+
+    @Override
+    public void run(Config config, Environment environment) throws Exception {
+        // ...
+        provider = (InMemoryProvider) bundle.getFeatureProvider();
+        provider.updateFlags(Map.of(/* ... */));
+        // ...
+    }
 }
 ```
 
 # Contributors
 * [Philipp Fehre](https://github.com/sideshowcoder)
+
+[1]: https://openfeature.dev/
+[2]: https://flagd.dev/
+[3]: https://github.com/open-feature/java-sdk/blob/main/src/main/java/dev/openfeature/sdk/providers/memory/InMemoryProvider.java
+[4]: https://central.sonatype.com/artifact/io.github.sideshowcoder/dropwizard-openfeature
+[5]: https://flagd.dev/providers/java/
