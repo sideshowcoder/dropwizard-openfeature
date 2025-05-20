@@ -12,7 +12,7 @@
     <name>dropwizard-openfeature</name>
     <url>https://github.com/sideshowcoder/dropwizard-openfeature</url>
 
-    <description>https://github.com/sideshowcoder/dropwizard-openfeature</description>
+    <description>OpenFeature bundle for Dropwizard</description>
 
     <properties>
         <java.version>21</java.version>
