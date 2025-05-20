@@ -1,3 +1,5 @@
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature/badge.svg)](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature) ![Maven Test & Build](https://github.com/sideshowcoder/dropwizard-openfeature/actions/workflows/maven-build.yml/badge.svg)
+
 # Dropwizard Openfeature
 
 This plugin integrates [openfeature][1] with dropwizard and allows you to use openfeature feature
