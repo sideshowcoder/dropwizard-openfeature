@@ -85,6 +85,11 @@
             <name>Maven Central</name>
             <url>https://central.sonatype.com</url>
         </repository>
+        <snapshotRepository>
+            <id>github</id>
+            <name>GitHub dropwizard-openfeature Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/sideshowcoder/dropwizard-openfeature</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <dependencies>
