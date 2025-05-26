@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature/badge.svg)](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature) ![Maven Test & Build](https://github.com/sideshowcoder/dropwizard-openfeature/actions/workflows/maven-build.yml/badge.svg)
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature/badge.svg?version=1.0.0)](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature) ![Maven Test & Build](https://github.com/sideshowcoder/dropwizard-openfeature/actions/workflows/maven-build.yml/badge.svg)
 
 # Dropwizard Openfeature
 
