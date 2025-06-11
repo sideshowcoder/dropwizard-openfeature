@@ -17,7 +17,7 @@ Currently only [flagd][2] and the SDKs [InMemoryProvider][3] providers are suppo
 <dependency>
   <groupId>io.github.sideshowcoder</groupId>
   <artifactId>dropwizard-openfeature</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -35,7 +35,7 @@ After installing the plugin locally you can include it in your `pom.xml`
 <dependency>
   <groupId>io.github.sideshowcoder</groupId>
   <artifactId>dropwizard-openfeature</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
