@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature/badge.svg?version=1.0.0)](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature) ![Maven Test & Build](https://github.com/sideshowcoder/dropwizard-openfeature/actions/workflows/maven-build.yml/badge.svg)
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature/badge.svg?version=1.0.1)](https://maven-badges.sml.io/sonatype-central/io.github.sideshowcoder/dropwizard-openfeature) ![Maven Test & Build](https://github.com/sideshowcoder/dropwizard-openfeature/actions/workflows/maven-build.yml/badge.svg)
 
 # Dropwizard Openfeature
 
@@ -35,7 +35,7 @@ After installing the plugin locally you can include it in your `pom.xml`
 <dependency>
   <groupId>io.github.sideshowcoder</groupId>
   <artifactId>dropwizard-openfeature</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
 </dependency>
 ```
 
