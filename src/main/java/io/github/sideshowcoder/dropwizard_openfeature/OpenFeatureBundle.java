@@ -1,6 +1,7 @@
 package io.github.sideshowcoder.dropwizard_openfeature;
 
 import dev.openfeature.contrib.providers.flagd.FlagdProvider;
+import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.FeatureProvider;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.providers.memory.InMemoryProvider;
@@ -8,7 +9,7 @@ import io.dropwizard.core.ConfiguredBundle;
 import io.dropwizard.core.setup.Environment;
 import io.github.sideshowcoder.dropwizard_openfeature.health.OpenFeatureHealthCheck;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class OpenFeatureBundle implements ConfiguredBundle<OpenFeatureBundleConfiguration> {
 
@@ -16,14 +17,14 @@ public class OpenFeatureBundle implements ConfiguredBundle<OpenFeatureBundleConf
 
     @Override
     public void run(OpenFeatureBundleConfiguration configuration, Environment environment) {
-        var config = configuration.getOpenFeatureConfiguration();
+        OpenFeatureConfiguration config = configuration.getOpenFeatureConfiguration();
         initializeFeatureProvider(config);
-        var manager = new OpenFeatureAPIManager(getFeatureProvider());
+        OpenFeatureAPIManager manager = new OpenFeatureAPIManager(getFeatureProvider());
         environment.lifecycle().manage(manager);
 
         if (config.getHealthcheck().isEnabled()) {
-            var client = OpenFeatureAPI.getInstance().getClient(config.getHealthcheck().getClientDomain());
-            var healthcheck = new OpenFeatureHealthCheck(client);
+            Client client = OpenFeatureAPI.getInstance().getClient(config.getHealthcheck().getClientDomain());
+            OpenFeatureHealthCheck healthcheck = new OpenFeatureHealthCheck(client);
             environment.healthChecks().register(config.getHealthcheck().getName(), healthcheck);
         }
     }
@@ -36,9 +37,13 @@ public class OpenFeatureBundle implements ConfiguredBundle<OpenFeatureBundleConf
     }
 
     private synchronized void initializeFeatureProvider(OpenFeatureConfiguration config) {
-        featureProvider = switch (config.getProviderType()) {
-            case FLAGD -> new FlagdProvider(config.getFlagd().getFlagdOptions());
-            case INMEMORY -> new InMemoryProvider(Map.of());
-        };
+        switch (config.getProviderType()) {
+            case INMEMORY:
+                featureProvider = new InMemoryProvider(new HashMap<>());
+                break;
+            case FLAGD:
+                featureProvider = new FlagdProvider(config.getFlagd().getFlagdOptions());
+                break;
+        }
     }
 }

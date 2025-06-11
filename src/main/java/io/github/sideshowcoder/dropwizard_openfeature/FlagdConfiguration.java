@@ -65,7 +65,7 @@ public class FlagdConfiguration {
     private int offlinePollIntervalMs;
 
     public FlagdOptions getFlagdOptions() {
-        var builder = FlagdOptions.builder();
+        FlagdOptions.FlagdOptionsBuilder builder = FlagdOptions.builder();
         if (resolver != null) {
             builder.resolverType(Config.Resolver.valueOf(resolver.toUpperCase()));
         }
