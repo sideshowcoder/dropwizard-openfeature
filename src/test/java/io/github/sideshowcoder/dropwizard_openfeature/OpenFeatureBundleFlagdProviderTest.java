@@ -1,5 +1,7 @@
 package io.github.sideshowcoder.dropwizard_openfeature;
 
+import com.codahale.metrics.health.HealthCheck;
+import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -21,14 +23,14 @@ public class OpenFeatureBundleFlagdProviderTest {
 
     @Test
     public void initializesHealthCheck() throws Exception {
-        var healthcheckResult = APP.getEnvironment().healthChecks().runHealthCheck("openfeature-health-check");
+        HealthCheck.Result healthcheckResult = APP.getEnvironment().healthChecks().runHealthCheck("openfeature-health-check");
         assertTrue(healthcheckResult.isHealthy());
     }
 
     @Test
     public void providesFeatureFlagsViaInMemoryProvider() throws Exception {
         // See flagd-test-flags.json for flag definitions used!
-        var client = OpenFeatureAPI.getInstance().getClient("flagd-client");
+        Client client = OpenFeatureAPI.getInstance().getClient("flagd-client");
         assertEquals("red", client.getStringValue("static-string-flag", "not-expected-value"));
     }
 

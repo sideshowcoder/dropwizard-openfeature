@@ -15,7 +15,8 @@
     <description>OpenFeature bundle for Dropwizard</description>
 
     <properties>
-        <java.version>21</java.version>
+        <!-- Support Java 8 as the same language level supported by the Openfeature SDK -->
+        <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>4.0.13</dropwizard.version>

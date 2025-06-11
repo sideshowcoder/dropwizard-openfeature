@@ -22,7 +22,7 @@ public class FlagdConfigurationTest {
 
     @Test
     public void providesFlagdOptions() throws Exception {
-        var configuration = factory.build(new ResourceConfigurationSourceProvider(), "basic-flagd-config.yml");
+        FlagdConfiguration configuration = factory.build(new ResourceConfigurationSourceProvider(), "basic-flagd-config.yml");
         assertEquals("flagd", configuration.getFlagdOptions().getHost());
         assertEquals(8082, configuration.getFlagdOptions().getPort());
         assertEquals(Config.Resolver.RPC, configuration.getFlagdOptions().getResolverType());

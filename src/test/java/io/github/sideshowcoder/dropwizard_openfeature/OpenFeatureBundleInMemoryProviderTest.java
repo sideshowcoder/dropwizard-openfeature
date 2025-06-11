@@ -1,5 +1,7 @@
 package io.github.sideshowcoder.dropwizard_openfeature;
 
+import com.codahale.metrics.health.HealthCheck;
+import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.providers.memory.Flag;
 import dev.openfeature.sdk.providers.memory.InMemoryProvider;
@@ -11,6 +13,7 @@ import io.github.sideshowcoder.dropwizard_openfeature.helpers.Config;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,23 +28,25 @@ public class OpenFeatureBundleInMemoryProviderTest {
 
     @Test
     public void initializesHealthCheck() throws Exception {
-        var healthcheckResult = APP.getEnvironment().healthChecks().runHealthCheck("openfeature-health-check");
+        HealthCheck.Result healthcheckResult = APP.getEnvironment().healthChecks().runHealthCheck("openfeature-health-check");
         assertTrue(healthcheckResult.isHealthy());
     }
 
     @Test
     public void providesFeatureFlagsViaInMemoryProvider() throws Exception {
-        var expectedValue = "expected-value";
-        var flagKey = "flag-key";
-        var flag = Flag.builder().variant("variant-key", expectedValue).defaultVariant("variant-key").build();
-        var flags = Map.<String, Flag<?>>of(flagKey, flag);
+        String expectedValue = "expected-value";
+
+        String flagKey = "flag-key";
+        Flag<Object> flag = Flag.builder().variant("variant-key", expectedValue).defaultVariant("variant-key").build();
+        Map<String, Flag<?>> flags = new HashMap<>();
+        flags.put(flagKey, flag);
 
         // set the in memory flags
-        var bundle = ((App) APP.getApplication()).getOpenFeatureBundle();
-        var provider = (InMemoryProvider) bundle.getFeatureProvider();
+        OpenFeatureBundle bundle = ((App) APP.getApplication()).getOpenFeatureBundle();
+        InMemoryProvider provider = (InMemoryProvider) bundle.getFeatureProvider();
         provider.updateFlags(flags);
 
-        var client = OpenFeatureAPI.getInstance().getClient("in-memory-provider-client");
+        Client client = OpenFeatureAPI.getInstance().getClient("in-memory-provider-client");
         assertEquals(expectedValue, client.getStringValue(flagKey, "not-expected-value"));
     }
 }

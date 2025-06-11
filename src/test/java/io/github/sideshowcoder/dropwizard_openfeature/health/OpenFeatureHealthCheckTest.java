@@ -1,5 +1,6 @@
 package io.github.sideshowcoder.dropwizard_openfeature.health;
 
+import com.codahale.metrics.health.HealthCheck;
 import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.ClientMetadata;
 import dev.openfeature.sdk.ProviderState;
@@ -41,7 +42,7 @@ public class OpenFeatureHealthCheckTest {
         when(client.getMetadata()).thenReturn(metadata);
         when(metadata.getDomain()).thenReturn("domain");
 
-        var result = healthCheck.check();
+        HealthCheck.Result result = healthCheck.check();
 
         assertFalse(result.isHealthy());
     }
