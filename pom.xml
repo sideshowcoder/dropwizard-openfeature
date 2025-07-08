@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>4.0.14</dropwizard.version>
-        <openfeature-sdk.version>1.15.1</openfeature-sdk.version>
+        <openfeature-sdk.version>1.16.0</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.11.11</openfeature-contrib-providers-flagd.version>
         <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
