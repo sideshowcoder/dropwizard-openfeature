@@ -13,6 +13,10 @@ public class OpenFeatureConfiguration {
 
     @Valid
     @JsonProperty
+    private GoFeatureFlagConfiguration gofeatureflag = new GoFeatureFlagConfiguration();
+
+    @Valid
+    @JsonProperty
     private OpenFeatureHealthCheckConfiguration healthcheck = new OpenFeatureHealthCheckConfiguration();
 
     @JsonProperty
@@ -26,6 +30,14 @@ public class OpenFeatureConfiguration {
 
     public void setFlagd(FlagdConfiguration flagd) {
         this.flagd = flagd;
+    }
+
+    public GoFeatureFlagConfiguration getGoFeatureFlag() {
+        return gofeatureflag;
+    }
+
+    public void setGoFeatureFlag(GoFeatureFlagConfiguration gofeatureflag) {
+        this.gofeatureflag = gofeatureflag;
     }
 
     public OpenFeatureHealthCheckConfiguration getHealthcheck() {

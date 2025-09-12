@@ -1,0 +1,7 @@
+staticstringflag:
+  variations:
+   red: "red"
+   green: "green"
+   blue: "blue"
+  defaultRule:
+    variation: red
