@@ -6,7 +6,7 @@
 
     <groupId>io.github.sideshowcoder</groupId>
     <artifactId>dropwizard-openfeature</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-openfeature</name>
