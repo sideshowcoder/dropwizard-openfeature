@@ -22,7 +22,7 @@
         <dropwizard.version>5.0.0</dropwizard.version>
         <openfeature-sdk.version>1.18.2</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.11.15</openfeature-contrib-providers-flagd.version>
-        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
