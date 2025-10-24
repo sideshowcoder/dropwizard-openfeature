@@ -15,13 +15,14 @@
     <description>OpenFeature bundle for Dropwizard</description>
 
     <properties>
-        <!-- Support Java 8 as the same language level supported by the Openfeature SDK -->
-        <java.version>8</java.version>
+        <!-- Support Java 11 as the same language level supported by the Openfeature SDK -->
+        <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>5.0.0</dropwizard.version>
         <openfeature-sdk.version>1.18.2</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.11.17</openfeature-contrib-providers-flagd.version>
+        <openfeature-contrib-providers-go-feature-flag.version>1.0.1</openfeature-contrib-providers-go-feature-flag.version>
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
@@ -31,6 +32,7 @@
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
         <mockito.version>5.20.0</mockito.version>
+        <testcontainers.version>1.21.3</testcontainers.version>
         <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
     </properties>
 
@@ -75,8 +77,15 @@
                 <artifactId>mockito-bom</artifactId>
                 <version>${mockito.version}</version>
                 <type>pom</type>
-                <scope>test</scope>
+                <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+        </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -113,6 +122,12 @@
             <version>${openfeature-contrib-providers-flagd.version}</version>
         </dependency>
         <dependency>
+            <groupId>dev.openfeature.contrib.providers</groupId>
+            <artifactId>go-feature-flag</artifactId>
+            <version>${openfeature-contrib-providers-go-feature-flag.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
             <scope>test</scope>
@@ -125,6 +140,21 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -165,8 +195,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                      <release>${maven.compiler.release}</release>
                     </configuration>
                 </plugin>
                 <plugin>

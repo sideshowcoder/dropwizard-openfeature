@@ -1,0 +1,4 @@
+openfeature:
+  provider: gofeatureflag
+  gofeatureflag:
+    endpoint: "http://localhost:1031/"
