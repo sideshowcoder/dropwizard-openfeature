@@ -7,6 +7,14 @@ import dev.openfeature.contrib.providers.gofeatureflag.GoFeatureFlagProviderOpti
 import dev.openfeature.contrib.providers.gofeatureflag.exception.InvalidOptions;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * Maps the {@link GoFeatureFlagConfiguration} confiuration in yaml to the actual {@link GoFeatureFlagProviderOptions }.
+ *
+ * Supported options
+ *
+ * Name | Type | example | required | description
+ * endpoit | String |	http://localhost:8016 | yes | endpoint to reach the GoFeatureFlag relay proxy
+ */
 public class GoFeatureFlagConfiguration {
 
     @JsonProperty

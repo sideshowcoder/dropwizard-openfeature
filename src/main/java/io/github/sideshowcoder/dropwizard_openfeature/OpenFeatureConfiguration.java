@@ -17,6 +17,10 @@ public class OpenFeatureConfiguration {
 
     @Valid
     @JsonProperty
+    private OfrepConfiguration ofrep = new OfrepConfiguration();
+
+    @Valid
+    @JsonProperty
     private OpenFeatureHealthCheckConfiguration healthcheck = new OpenFeatureHealthCheckConfiguration();
 
     @JsonProperty
@@ -38,6 +42,14 @@ public class OpenFeatureConfiguration {
 
     public void setGoFeatureFlag(GoFeatureFlagConfiguration gofeatureflag) {
         this.gofeatureflag = gofeatureflag;
+    }
+
+    public OfrepConfiguration getOfrep() {
+        return ofrep;
+    }
+
+    public void setOfrep(OfrepConfiguration ofrep) {
+        this.ofrep = ofrep;
     }
 
     public OpenFeatureHealthCheckConfiguration getHealthcheck() {

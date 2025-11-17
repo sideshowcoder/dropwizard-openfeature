@@ -2,8 +2,8 @@ package io.github.sideshowcoder.dropwizard_openfeature;
 
 import dev.openfeature.contrib.providers.flagd.FlagdProvider;
 import dev.openfeature.contrib.providers.gofeatureflag.GoFeatureFlagProvider;
-import dev.openfeature.contrib.providers.gofeatureflag.GoFeatureFlagProviderOptions;
 import dev.openfeature.contrib.providers.gofeatureflag.exception.InvalidOptions;
+import dev.openfeature.contrib.providers.ofrep.OfrepProvider;
 import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.FeatureProvider;
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -53,6 +53,9 @@ public class OpenFeatureBundle implements ConfiguredBundle<OpenFeatureBundleConf
                 } catch(InvalidOptions e) {
                     new RuntimeException(e);
                 }
+                break;
+            case OFREP:
+                featureProvider = OfrepProvider.constructProvider(config.getOfrep().getOfrepProviderOptions());
                 break;
         }
     }

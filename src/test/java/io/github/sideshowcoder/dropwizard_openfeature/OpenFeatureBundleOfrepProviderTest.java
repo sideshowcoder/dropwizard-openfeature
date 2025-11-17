@@ -23,14 +23,14 @@ import io.github.sideshowcoder.dropwizard_openfeature.helpers.GoFeatureFlagConta
 
 @Testcontainers
 @ExtendWith(DropwizardExtensionsSupport.class)
-public class OpenFeatureBundleGoFeatureFlagProviderTest {
+public class OpenFeatureBundleOfrepProviderTest {
 
     @Container
     private static GoFeatureFlagContainer container = GoFeatureFlagContainer.create();
 
     private static final DropwizardAppExtension<Config> APP = new DropwizardAppExtension<>(
         App.class,
-        ResourceHelpers.resourceFilePath("go-feature-flag-provider-config.yml")
+        ResourceHelpers.resourceFilePath("ofrep-provider-config.yml")
     );
 
     @Test
@@ -40,9 +40,9 @@ public class OpenFeatureBundleGoFeatureFlagProviderTest {
     }
 
     @Test
-    public void providesFeatureFlagsGoFeatureFlag() throws Exception {
-        Client client = OpenFeatureAPI.getInstance().getClient("go-feature-flag-client");
-        // GoFeatureFlags requires a target key for all queries!
+    public void providesFeatureFlagsOfrepProvider() throws Exception {
+        Client client = OpenFeatureAPI.getInstance().getClient("ofrep-client");
+        // GoFeatureFlags requires a target key for all queries even using ofrep protocol!
         EvaluationContext ctx = new ImmutableContext("target");
         assertEquals("red", client.getStringValue("staticstringflag", "not-expected-value", ctx));
     }

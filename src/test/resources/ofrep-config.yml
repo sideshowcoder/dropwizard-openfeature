@@ -1,0 +1,5 @@
+openfeature:
+  provider: ofrep
+  ofrep:
+    baseUrl: "http://localhost:1031/"
+    timeout: 5
