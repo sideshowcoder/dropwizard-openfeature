@@ -19,7 +19,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>5.0.0</dropwizard.version>
+        <dropwizard.version>5.0.1</dropwizard.version>
         <openfeature-sdk.version>1.20.1</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.11.19</openfeature-contrib-providers-flagd.version>
         <openfeature-contrib-providers-go-feature-flag.version>1.1.1</openfeature-contrib-providers-go-feature-flag.version>
