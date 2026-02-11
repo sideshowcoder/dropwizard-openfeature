@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>5.0.1</dropwizard.version>
         <openfeature-sdk.version>1.20.1</openfeature-sdk.version>
-        <openfeature-contrib-providers-flagd.version>0.11.19</openfeature-contrib-providers-flagd.version>
+        <openfeature-contrib-providers-flagd.version>0.11.20</openfeature-contrib-providers-flagd.version>
         <openfeature-contrib-providers-go-feature-flag.version>1.1.1</openfeature-contrib-providers-go-feature-flag.version>
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
