@@ -1,0 +1,18 @@
+services:
+    go-feature-flag:
+      image: gofeatureflag/go-feature-flag:latest
+      ports:
+        - 1031:1031 # relay proxy port
+      volumes:
+        # relay proxy config
+        - ./src/test/resources/goff-proxy.yaml:/goff/goff-proxy.yaml
+        # flags to be served
+        - ./src/test/resources/go-feature-flags-flags.yaml:/goff/flags.yaml
+    flagd:
+      image: ghcr.io/open-feature/flagd:latest
+      command: start --uri file:/etc/flagd/flagd-test-flags.json
+      ports:
+        - 8013:8013 # standard port
+        - 8016:8016 # ofrep port
+      volumes:
+        - ./src/test/resources:/etc/flagd

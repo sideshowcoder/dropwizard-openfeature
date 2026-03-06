@@ -1,0 +1,36 @@
+### flagd ###
+POST http://localhost:8013/flagd.evaluation.v1.Service/ResolveString
+Content-Type: application/json
+
+{
+  "flagKey": "static-string-flag",
+  "context": {}
+}
+
+### ofrep ###
+
+# flagd bulk
+POST http://localhost:8016/ofrep/v1/evaluate/flags
+
+# flagd flag
+POST http://localhost:8016/ofrep/v1/evaluate/flags/static-string-flag
+
+# go-feature-flag
+POST http://localhost:1031/ofrep/v1/evaluate/flags/staticstringflag
+Content-Type: application/json
+
+{
+  "context": {
+    "targetingKey": "key"
+  }
+}
+
+# go-feature-flag bulk
+POST http://localhost:1031/ofrep/v1/evaluate/flags
+Content-Type: application/json
+
+{
+  "context": {
+    "targetingKey": "key"
+  }
+}
