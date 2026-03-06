@@ -6,7 +6,7 @@
 
     <groupId>io.github.sideshowcoder</groupId>
     <artifactId>dropwizard-openfeature</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1.0</version>
     <packaging>jar</packaging>
 
     <name>dropwizard-openfeature</name>
@@ -23,6 +23,7 @@
         <openfeature-sdk.version>1.20.1</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.11.20</openfeature-contrib-providers-flagd.version>
         <openfeature-contrib-providers-go-feature-flag.version>1.1.1</openfeature-contrib-providers-go-feature-flag.version>
+        <openfeature-contrib-providers-ofrep.version>0.0.1</openfeature-contrib-providers-ofrep.version>
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
@@ -116,6 +117,7 @@
             <artifactId>sdk</artifactId>
             <version>${openfeature-sdk.version}</version>
         </dependency>
+
         <dependency>
             <groupId>dev.openfeature.contrib.providers</groupId>
             <artifactId>flagd</artifactId>
@@ -125,6 +127,11 @@
             <groupId>dev.openfeature.contrib.providers</groupId>
             <artifactId>go-feature-flag</artifactId>
             <version>${openfeature-contrib-providers-go-feature-flag.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>dev.openfeature.contrib.providers</groupId>
+            <artifactId>ofrep</artifactId>
+            <version>${openfeature-contrib-providers-ofrep.version}</version>
         </dependency>
 
         <dependency>

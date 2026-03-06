@@ -1,0 +1,6 @@
+openfeature:
+  provider: ofrep
+  ofrep:
+    baseurl: http://localhost:1031
+    timeout: 500
+    threadcount: 1
