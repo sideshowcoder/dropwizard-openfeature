@@ -12,9 +12,6 @@ It implements support for
 - [GO Feature Flag][6]
 - [OpenFeature Remote Evaluation Protocol (OFREP)][8] to support any providers implementing it
 
-Currently only [flagd][2] and the SDKs [InMemoryProvider][3] providers are
-supported
-
 ## Installing the bundle
 
 ### Releases from maven central 
