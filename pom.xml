@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>5.0.2</dropwizard.version>
-        <openfeature-sdk.version>1.20.2</openfeature-sdk.version>
+        <openfeature-sdk.version>1.22.0</openfeature-sdk.version>
         <openfeature-contrib-providers-flagd.version>0.14.0</openfeature-contrib-providers-flagd.version>
         <openfeature-contrib-providers-go-feature-flag.version>1.1.2</openfeature-contrib-providers-go-feature-flag.version>
         <openfeature-contrib-providers-ofrep.version>0.0.2</openfeature-contrib-providers-ofrep.version>
